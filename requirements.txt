@@ -5,5 +5,3 @@ spacy==3.8.2
 streamlit==1.38.0
 tensorflow==2.18.0
 transformers==4.46.3
-tf-keras
-python -m spacy download en_core_web_sm
