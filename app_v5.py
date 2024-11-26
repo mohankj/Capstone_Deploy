@@ -15,7 +15,7 @@ nltk.download('punkt')
 stop_words = set(stopwords.words('english'))
 
 # Load spaCy model for tokenization and lemmatization
-nlp = spacy.load("en_core_web_sm")
+# nlp = spacy.load("en_core_web_sm")
 
 # Function to load the sentiment analysis pipeline
 @st.cache_resource
@@ -71,21 +71,21 @@ def clean_data(text):
     return text
 
 # Function for preprocessing the review text
-def preprocess_text(text):
-    # Lowercase the text
-    text = text.lower()
+# def preprocess_text(text):
+#     # Lowercase the text
+#     text = text.lower()
     
-    # Remove any special characters or digits
-    text = re.sub(r'[^a-z\s]', '', text)
+#     # Remove any special characters or digits
+#     text = re.sub(r'[^a-z\s]', '', text)
     
-    # Tokenize the text using spaCy
-    doc = nlp(text)
+#     # Tokenize the text using spaCy
+#     doc = nlp(text)
     
-    # Remove stopwords, short words, and lemmatize
-    tokens = [token.lemma_ for token in doc if token.text not in stop_words and len(token.text) > 2]
+#     # Remove stopwords, short words, and lemmatize
+#     tokens = [token.lemma_ for token in doc if token.text not in stop_words and len(token.text) > 2]
     
-    # Join the tokens back into a single string
-    return ' '.join(tokens)
+#     # Join the tokens back into a single string
+#     return ' '.join(tokens)
 
 # Function to generate GPT-2 response (alternative to GPT-3.5)
 def generate_gpt2_response(review_text):
@@ -124,8 +124,8 @@ if st.button("🔍 Analyze"):
             emotion_score = emotion_result[0]['score']
 
             # Topic Modeling
-            preprocessed_input = preprocess_text(cleaned_input)
-            predicted_topic, topic_distribution, topic_words = predict_topic(preprocessed_input, lda, vectorizer)
+            # preprocessed_input = preprocess_text(cleaned_input)
+            predicted_topic, topic_distribution, topic_words = predict_topic(cleaned_input, lda, vectorizer)
 
             # GPT-2 Response Generation (Alternative to GPT-3.5)
             gpt2_response = generate_gpt2_response(cleaned_input)
