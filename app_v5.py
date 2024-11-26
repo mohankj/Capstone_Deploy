@@ -1,5 +1,5 @@
 import streamlit as st
-from transformers import pipeline, TFRobertaForSequenceClassification, RobertaTokenizer, GPT2LMHeadModel, GPT2Tokenizer
+from transformers import pipeline, TFRobertaForSequenceClassification, RobertaTokenizer, TFGPT2LMHeadModel, GPT2Tokenizer
 import tensorflow as tf
 import re
 import nltk
@@ -90,9 +90,9 @@ def clean_data(text):
 # Function to generate GPT-2 response (alternative to GPT-3.5)
 def generate_gpt2_response(review_text):
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-    model = GPT2LMHeadModel.from_pretrained("gpt2")
+    model = TFGPT2LMHeadModel.from_pretrained("gpt2")
 
-    inputs = tokenizer.encode(review_text, return_tensors="pt")
+    inputs = tokenizer.encode(review_text, return_tensors="tf")
     outputs = model.generate(inputs, max_length=100, num_return_sequences=1, no_repeat_ngram_size=2, top_k=50)
 
     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
